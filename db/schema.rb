@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127235606) do
+ActiveRecord::Schema.define(:version => 20111128004245) do
 
   create_table "albums", :force => true do |t|
     t.integer  "band_id"
@@ -35,9 +35,13 @@ ActiveRecord::Schema.define(:version => 20111127235606) do
     t.string   "title"
     t.string   "format"
     t.integer  "position"
-    t.integer  "flags",      :default => 0
+    t.integer  "flags",              :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "media_file_name"
+    t.string   "media_content_type"
+    t.integer  "media_file_size"
+    t.datetime "media_updated_at"
   end
 
 end
