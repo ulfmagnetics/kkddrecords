@@ -1,14 +1,18 @@
 source 'http://rubygems.org'
 
-gem 'rails',            '3.1.0'
-gem 'mysql2',           '0.3.10'
-gem 'json'
-gem 'heroku'
+gem 'aws-s3',           :require => 'aws/s3'
 gem 'bitfields',        "~> 0.4.0"
+gem 'heroku'
+gem 'json'
+gem 'mysql2',           '0.3.10'
+gem 'paperclip'
+gem 'rails',            '3.1.0'
+gem 's3_swf_upload',    :git => 'git://github.com/nathancolgate/s3-swf-upload-plugin'
+
 
 group :development, :test do
-  gem "rspec-rails", "~> 2.7.0"
-  gem "shoulda-matchers", "~> 1.0.0"
+  gem "rspec-rails",        "~> 2.7.0"
+  gem "shoulda-matchers",   "~> 1.0.0"
 end
 
 group :test do
