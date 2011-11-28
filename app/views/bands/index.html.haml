@@ -1,0 +1,16 @@
+%h1 Bands
+
+%ul#bands
+  - @bands.each do |band|
+    %li= band.name
+
+%h1 Add a Band
+
+#band-form
+  = form_for :band do |f|
+    = f.error_messages :header_tag => :h2
+    %ul
+      %li
+        %label Name
+        = f.text_field :name, :autocomplete => bands_autocomplete_band_name_path
+      %li= f.submit
