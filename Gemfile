@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'aws-s3',           :require => 'aws/s3'
 gem 'bitfields',        "~> 0.4.0"
+gem 'haml'
 gem 'heroku'
 gem 'json'
 gem 'mysql2',           '0.3.10'
@@ -17,6 +18,8 @@ end
 
 group :test do
   gem "nyan-cat-formatter"
+  gem "factory_girl_rails"
+  gem "faker"
 end
 
 group :assets do
