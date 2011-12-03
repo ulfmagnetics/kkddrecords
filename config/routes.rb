@@ -3,4 +3,6 @@ Killkilldiedie::Application.routes.draw do
 
   resources :bands
   get 'bands/autocomplete_band_name'
+
+  resources :explosions
 end

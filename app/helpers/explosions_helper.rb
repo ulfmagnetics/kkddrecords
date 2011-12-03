@@ -1,0 +1,2 @@
+module ExplosionsHelper
+end

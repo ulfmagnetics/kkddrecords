@@ -11,7 +11,9 @@ gem 'mysql2',           '0.3.10'
 gem 'paperclip'
 gem 'rails',            '3.1.0'
 gem 'rails3-jquery-autocomplete'
+gem 'rubyzip2'
 gem 's3_swf_upload',    :git => 'git://github.com/nathancolgate/s3-swf-upload-plugin'
+gem 'state_machine'
 
 group :assets do
   gem 'sass-rails',     "~> 3.1.0"
@@ -21,6 +23,7 @@ end
 
 group :development do
   gem 'unicorn'
+  gem 'ruby-debug19'
 end
 
 group :development, :test do

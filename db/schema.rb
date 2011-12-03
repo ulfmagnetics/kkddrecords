@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128004245) do
+ActiveRecord::Schema.define(:version => 20111128074628) do
 
   create_table "albums", :force => true do |t|
     t.integer  "band_id"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(:version => 20111128004245) do
 
   create_table "bands", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "explosions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "zipfile_file_name"
+    t.string   "zipfile_content_type"
+    t.integer  "zipfile_file_size"
+    t.datetime "zipfile_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

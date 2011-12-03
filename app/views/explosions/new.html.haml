@@ -1,0 +1,11 @@
+%h1 New Explosion
+
+#errors
+
+#explosion-form
+  = form_for @explosion do |f|
+    %ul
+      %li
+        %label ZIP File
+        = f.file_field :zipfile
+      %li= f.submit
