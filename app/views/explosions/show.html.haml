@@ -1,0 +1,12 @@
+%h1 Show Explosion
+
+%h4 Here's what I'm going to do:
+
+%ul#actions
+  - @explosion.actions.each do |action|
+    %li= action.to_s
+
+%h4 Is that okay?
+
+=link_to 'DO IT'
+=link_to 'Cancel'

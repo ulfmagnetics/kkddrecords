@@ -1,9 +1,8 @@
 %h1 New Explosion
 
-#errors
-
 #explosion-form
   = form_for @explosion do |f|
+    = f.error_messages
     %ul
       %li
         %label ZIP File

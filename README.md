@@ -15,7 +15,7 @@ REQUIREMENTS
     - Download links for whatever formats have been uploaded appear below album.
     - Decent default cover image if no art
 
-- Easy-to-use album uploader.  Need to facilitate KKDD members to fill in missing content.
+- Easy-to-use album uploader.  Need to facilitate the filling in of missing content byKKDD members.
     - Password authentication.
     - Log who uploaded album and when.
     - Upload ZIP of album tracks and artwork.
