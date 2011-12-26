@@ -1,17 +1,17 @@
 development:
-  bucket: kkddrecords-dev
+  bucket: kkddrecords-development
   access_key_id: 0BJSW3XD4NR1HVKV2682
   secret_access_key: KMf6aC3N9q/YsdxhduZVFgc8MEHcAEiSF02sECdq
   max_file_size: 524288000
   acl: public-read
-    
+
 test:
   bucket: kkddrecords-test
   access_key_id: 0BJSW3XD4NR1HVKV26820BJSW3XD4NR1HVKV2682
   secret_access_key: KMf6aC3N9q/YsdxhduZVFgc8MEHcAEiSF02sECdq
   max_file_size: 512000
   acl: public-read
-  
+
 production:
   bucket: kkddrecords-production
   access_key_id: 0BJSW3XD4NR1HVKV2682
