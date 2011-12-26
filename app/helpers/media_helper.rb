@@ -24,8 +24,6 @@ module MediaHelper
       [valid_audio_formats, valid_image_formats].flatten
     end
 
-    private
-
     def valid_audio_mappings
       { 'mp3'       => ['audio/mp3', 'audio/mpeg3', 'audio/x-mpeg-3'],
         'aiff'      => ['audio/aiff', 'audio/x-aiff'],

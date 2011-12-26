@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111226213734) do
+ActiveRecord::Schema.define(:version => 20111226231740) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(:version => 20111226213734) do
     t.string   "media_content_type"
     t.integer  "media_file_size"
     t.datetime "media_updated_at"
+    t.integer  "length_in_seconds"
+    t.text     "notes"
   end
 
 end
