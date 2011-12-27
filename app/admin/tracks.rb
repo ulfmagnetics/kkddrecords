@@ -1,16 +1,18 @@
 ActiveAdmin.register Track do
+  config.sort_order = 'album_id_asc'
+
   index do
-    column :title do |track|
+    column :title, :sortable => :title do |track|
       link_to track.title, admin_track_path(track)
     end
     column :band do |track|
       link_to track.album.band.name, admin_band_path(track.album.band) unless track.album.nil?
     end
-    column :album do |track|
+    column :album, :sortable => :album_id do |track|
       link_to track.album.title, admin_album_path(track.album) unless track.album.nil?
     end
     column "Track #", :position
-    column "Length" do |track|
+    column "Length", :sortable => :length_in_seconds do |track|
       track.length_string
     end
     column :format
