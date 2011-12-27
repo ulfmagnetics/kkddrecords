@@ -3,22 +3,26 @@ class Track < ActiveRecord::Base
   include Bitfields
   bitfield :flags, 1 => :hidden
 
+  belongs_to :album
+
   validates_presence_of :title
   validates_numericality_of :position
   validates_inclusion_of :format, :in => valid_audio_formats
 
   has_attached_file :media,
-  :storage => :s3,
-  :bucket => S3_CONFIG[Rails.env]["bucket"],
-  :s3_credentials => {
-    :access_key_id => S3_CONFIG[Rails.env]["access_key_id"],
-    :secret_access_key => S3_CONFIG[Rails.env]["secret_access_key"]
-  }
+    :storage => :s3,
+    :bucket => S3_CONFIG[Rails.env]["bucket"],
+    :s3_credentials => {
+      :access_key_id => S3_CONFIG[Rails.env]["access_key_id"],
+      :secret_access_key => S3_CONFIG[Rails.env]["secret_access_key"]
+    }
   validates_attachment_content_type :media, :content_type => valid_audio_mime_types
   validates_attachment_size :media, :less_than => 250.megabytes
 
   before_media_post_process :update_format
-  before_media_post_process :update_from_id3_tags, :if => Proc.new { |track| track.media_content_type == 'audio/mp3' }
+  before_media_post_process :update_from_id3_tags, :if => Proc.new {|track| track.media_content_type == 'audio/mp3'}
+
+  before_save :find_or_create_album_from_id3_tags, :if => Proc.new {|track| track.id3_v1_tag.present?}
 
   private
 
@@ -36,6 +40,23 @@ class Track < ActiveRecord::Base
       self.id3_v2_tag = mp3.tag2.try(:to_yaml)
     end
   rescue => ex
-    errors.add(:base, "Couldn't update track information from the MP3 tag.")
+    errors.add(:base, "Couldn't update track information from the MP3 tags.")
+    Rails.logger.error("Caught exception while updating track info from tags: #{ex.inspect}")
+  end
+
+  def find_or_create_album_from_id3_tags
+    id3 = YAML::load(self.id3_v1_tag) unless self.id3_v1_tag.blank?
+    return unless id3.present? && id3['album'].present? && id3['artist'].present?
+    album = Album.joins(:band).where(:albums => {:title => id3['album']}, :bands => {:name => id3['artist']}).first
+    if album.blank?
+      album = Album.new
+      album.band = Band.where(:name => id3['artist']).first || Band.create(:name => id3['artist'])
+      album.title = id3['album']
+      album.save
+    end
+    self.album = album
+  rescue => ex
+    errors.add(:base, "Couldn't create album and/or band from MP3 tags.")
+    Rails.logger.error("Caught exception while creating album from tags: #{ex.inspect}")
   end
 end
