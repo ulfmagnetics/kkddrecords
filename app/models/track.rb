@@ -24,6 +24,10 @@ class Track < ActiveRecord::Base
 
   before_save :find_or_create_album_from_id3_tags, :if => Proc.new {|track| track.id3_v1_tag.present?}
 
+  def length_string
+    (self.length_in_seconds.to_f / 60).floor.to_s.rjust(2, '0') + ':' + (self.length_in_seconds % 60).to_s.rjust(2, '0')
+  end
+
   private
 
   def update_format
