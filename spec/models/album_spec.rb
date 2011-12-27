@@ -13,7 +13,6 @@ describe Album do
   end
 
   it { should validate_presence_of(:title).with_message("is required") }
-  it { should validate_presence_of(:release_date).with_message("is required") }
 
   it { should belong_to(:band) }
   it { should have_many(:tracks) }
