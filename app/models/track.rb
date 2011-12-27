@@ -27,6 +27,12 @@ class Track < ActiveRecord::Base
   def length_string
     (self.length_in_seconds.to_f / 60).floor.to_s.rjust(2, '0') + ':' + (self.length_in_seconds % 60).to_s.rjust(2, '0')
   end
+  
+  # See http://jimneath.org/2008/05/15/swfupload-paperclip-and-ruby-on-rails.html
+  def swfupload_media=(data)
+    data.content_type = MIME::Types.type_for(data.original_filename).to_s
+    self.media = data
+  end
 
   private
 

@@ -33,4 +33,16 @@ ActiveAdmin.register Track do
     end
     f.buttons
   end
+  
+  collection_action :uploader
+  
+  collection_action :swfupload_handler, :method => :post do
+    @track = Track.new(:swfupload_media => params[:Filedata])
+    if @track.save
+      render :text => "Successfully uploaded file '#{track.media.original_filename}"
+    else
+      render :text => 'Error while uploading file via swfupload'
+    end
+    head 200
+  end
 end
