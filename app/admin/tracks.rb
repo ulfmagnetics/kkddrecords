@@ -14,6 +14,7 @@ ActiveAdmin.register Track do
       track.length_string
     end
     column :format
+    column :created_at
 
     default_actions
   end
