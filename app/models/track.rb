@@ -1,8 +1,7 @@
 class Track < ActiveRecord::Base
+  include MediaHelper
   include Bitfields
   bitfield :flags, 1 => :hidden
-
-  include MediaHelper
 
   validates_presence_of :title
   validates_numericality_of :position
@@ -22,9 +21,9 @@ class Track < ActiveRecord::Base
   before_media_post_process :update_from_id3_tags, :if => Proc.new { |track| track.media_content_type == 'audio/mp3' }
 
   private
-  
+
   def update_format
-    self.format = Track.valid_audio_mappings.detect {|format,mime_types| mime_types.include?(media_content_type)}.try(:first)
+    self.format = self.class.valid_audio_mappings.detect {|format,mime_types| mime_types.include?(media_content_type)}.try(:first)
   end
 
   def update_from_id3_tags
@@ -33,6 +32,10 @@ class Track < ActiveRecord::Base
       self.position = mp3.tag.tracknum
       self.notes = "MPEG #{mp3.mpeg_version} Layer #{mp3.layer} #{mp3.vbr ? "VBR" : "CBR"} #{mp3.bitrate} Kbps #{mp3.channel_mode} #{mp3.samplerate} Hz"
       self.length_in_seconds = mp3.length.round
+      self.id3_v1_tag = mp3.tag.try(:to_yaml)
+      self.id3_v2_tag = mp3.tag2.try(:to_yaml)
     end
+  rescue => ex
+    errors.add(:base, "Couldn't update track information from the MP3 tag.")
   end
 end

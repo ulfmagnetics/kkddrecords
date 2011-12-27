@@ -6,7 +6,7 @@ ActiveAdmin.register Track do
       f.input :format, :as => :select, :collection => Track.valid_audio_formats
     end
     f.inputs "Media" do
-      f.input :media, :as => :file
+      f.input :media, :as => :file, :hint => "MP3 tags will be used to set title, position, band, album, etc."
     end
     f.buttons
   end
