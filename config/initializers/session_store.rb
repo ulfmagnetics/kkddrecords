@@ -1,8 +1,5 @@
-# Be sure to restart your server when you modify this file.
+require "./app/middleware/flash_session_cookie"
 
-Killkilldiedie::Application.config.session_store :cookie_store, :key => '_killkilldiedie_session'
+Killkilldiedie::Application.config.session_store :active_record_store
 
-# Use the database for sessions instead of the cookie-based default,
-# which shouldn't be used to store highly confidential information
-# (create the session table with "rails generate session_migration")
-# Killkilldiedie::Application.config.session_store :active_record_store
+Rails.application.config.middleware.insert_before(ActiveRecord::SessionStore, Killkilldiedie::Middleware::FlashSessionCookie)

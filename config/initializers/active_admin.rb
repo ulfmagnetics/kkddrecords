@@ -99,5 +99,5 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_stylesheet.css'
   #
   # To load a javascript file:
-  config.register_javascript 'admin/tracks.js'
+  config.register_javascript 'admin/tracks.js.erb'
 end

@@ -33,16 +33,23 @@ ActiveAdmin.register Track do
     end
     f.buttons
   end
-  
-  collection_action :uploader
-  
+
+  collection_action :uploader do
+    @session_id = request.session_options[:id]
+  end
+
   collection_action :swfupload_handler, :method => :post do
     @track = Track.new(:swfupload_media => params[:Filedata])
     if @track.save
-      render :text => "Successfully uploaded file '#{track.media.original_filename}"
+      render :text => "Successfully uploaded file '#{@track.media.original_filename}"
     else
-      render :text => 'Error while uploading file via swfupload'
+      Rails.logger.info("Track errors: #{@track.errors.full_messages}")
+      render :text => 'Error while uploading file via swfupload.'
     end
     head 200
+  end
+
+  controller do
+    protect_from_forgery :except => :swfupload_handler
   end
 end

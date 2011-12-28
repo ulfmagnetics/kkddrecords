@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require "./app/middleware/flash_session_cookie"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -17,7 +16,7 @@ module Killkilldiedie
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{Rails.root}/app/middleware)
+    # config.autoload_paths += %W(#{Rails.root.to_s}/app/middleware)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -45,7 +44,5 @@ module Killkilldiedie
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
-    config.middleware.insert_before ActionDispatch::Session::CookieStore, Killkilldiedie::Middleware::FlashSessionCookie
   end
 end

@@ -20,17 +20,17 @@ class Track < ActiveRecord::Base
   validates_attachment_size :media, :less_than => 250.megabytes
 
   before_media_post_process :update_format
-  before_media_post_process :update_from_id3_tags, :if => Proc.new {|track| track.media_content_type == 'audio/mp3'}
+  before_media_post_process :update_from_id3_tags, :if => Proc.new {|track| self.class.valid_audio_mappings['mp3'].include?(track.media_content_type)}
 
   before_save :find_or_create_album_from_id3_tags, :if => Proc.new {|track| track.id3_v1_tag.present?}
 
   def length_string
     (self.length_in_seconds.to_f / 60).floor.to_s.rjust(2, '0') + ':' + (self.length_in_seconds % 60).to_s.rjust(2, '0')
   end
-  
+
   # See http://jimneath.org/2008/05/15/swfupload-paperclip-and-ruby-on-rails.html
   def swfupload_media=(data)
-    data.content_type = MIME::Types.type_for(data.original_filename).to_s
+    data.content_type = MIME::Types.type_for(data.original_filename).try(:first)
     self.media = data
   end
 

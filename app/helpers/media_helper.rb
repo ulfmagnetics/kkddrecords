@@ -25,7 +25,7 @@ module MediaHelper
     end
 
     def valid_audio_mappings
-      { 'mp3'       => ['audio/mp3', 'audio/mpeg3', 'audio/x-mpeg-3'],
+      { 'mp3'       => ['audio/mp3', 'audio/mpeg3', 'audio/x-mpeg-3', 'audio/mpeg'],
         'aiff'      => ['audio/aiff', 'audio/x-aiff'],
         'wav'       => ['audio/wav', 'audio/x-wav'],
         'flac'      => ['audio/flac']
