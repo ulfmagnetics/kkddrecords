@@ -1,0 +1,3 @@
+%ul
+  - @tracks.each do |track|
+    %li.track= render :partial => 'track', :locals => {:track => track}

@@ -1,0 +1,14 @@
+%div{:id => "album-#{album.id}"}  
+  %h4= album.title
+  #details
+    -if album.release_date.present?
+      %label Release Date
+      .detail= album.release_date
+  %input{:type => 'button', :class => 'play-button', :value => 'Play Album'}
+  %ul.tracks
+    -album.tracks.each do |track|
+      %li.track
+        =track.title
+        (
+        =track.format
+        )

@@ -1,0 +1,4 @@
+%ul.albums
+  -@albums.each do |album|
+    %li
+      =render :partial => 'album', :locals => { :album => album }

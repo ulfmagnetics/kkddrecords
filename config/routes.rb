@@ -3,12 +3,12 @@ Killkilldiedie::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :s3_uploads
-
+  resources :albums
   resources :bands
   get 'bands/autocomplete_band_name'
-
   resources :explosions
-  
+  resources :tracks
+
   root :to => 'home#index'
+
 end

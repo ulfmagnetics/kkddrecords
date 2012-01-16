@@ -1,0 +1,5 @@
+%div{:class => 'track-container', :id => "track-#{track.id}"}
+  %label{:for => "track-#{track.id}"}= link_to 'Play', track.media.to_s, :class => 'track'
+  .title= track.title
+  .album= track.album.title
+  .band= track.album.band.name

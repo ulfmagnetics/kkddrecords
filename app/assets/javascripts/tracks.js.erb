@@ -1,0 +1,32 @@
+$(document).ready(function() {
+  function loadTrack(link) {
+    var container = link.closest('.track-container');
+    jplayer.jPlayer("setMedia", { mp3: link.attr('href') });
+    $('#now_playing .title').text(container.find('.title').text());
+    $('#now_playing .album').text(container.find('.album').text());
+    $('#now_playing .band').text(container.find('.band').text());
+  }
+
+  var jplayer = $('#jplayer');
+
+  jplayer.jPlayer({
+    swfPath: 'flash',
+    ready: function() {
+      loadTrack($('.track-container').first());
+    }
+  });
+
+  $('a.track').click(function(e) {
+    loadTrack($(this));
+    jplayer.jPlayer("play");
+    $(this).blur();
+    return false;
+  })
+
+  $('.control_play').click(function() { jplayer.jPlayer("play"); });
+  $('.control_pause').click(function() { jplayer.jPlayer("pause"); });
+
+  <% if Rails.env.to_s == 'development' %>
+  $("#jplayer_inspector").jPlayerInspector({jPlayer:$("#jplayer")});
+  <% end %>
+});
