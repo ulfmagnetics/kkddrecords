@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'activeadmin'
 gem 'aws-s3',           :require => 'aws/s3'
 gem 'bitfields',        '~> 0.4.0'
+gem 'compass',          "~> 0.12.alpha"
 gem 'dynamic_form'
 gem 'haml'
 gem 'jquery-rails'
